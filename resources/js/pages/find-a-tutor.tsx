@@ -14,8 +14,8 @@ export default function FindTutorPage() {
     const subjects = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English Literature', 'Spanish', 'French', 'Computer Science'];
     const levels = ['kindergarten', 'primary', 'secondary', 'undergraduate', 'postgraduate'];
     const languages = ['english', 'french', 'cibemba', 'chinyanja', 'silozi', 'chitonga'];
-    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-    const hours = Array.from({ length: 24 }, (_, i) => i);
+    // const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    // const hours = Array.from({ length: 24 }, (_, i) => i);
 
     const id = useId();
 
