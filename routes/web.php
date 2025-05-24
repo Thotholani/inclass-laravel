@@ -29,3 +29,9 @@ Route::get("/select-role/student", fn() => inertia('auth/student-register'));
 Route::get("/select-role/tutor", fn() => inertia('auth/tutor-register'));
 
 Route::get("/student/dashboard", fn() => inertia('student/dashboard'));
+
+Route::get("/student/lessons", fn() => inertia('student/lessons'));
+
+Route::get("/student/find-a-tutor", fn() => inertia('student/find-a-tutor'));
+
+Route::get("/student/wallet", fn() => inertia('student/wallet'));

@@ -109,7 +109,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
                                     <Menu />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent className="h-full w-full" side="top">
+                            <SheetContent className="h-full w-full" side="right">
                                 <div className="mx-auto flex h-full w-11/12 flex-col pt-6 pb-6">
                                     <div className="flex flex-1 flex-col gap-6">
                                         <div className="space-y-4">

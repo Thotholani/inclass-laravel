@@ -106,8 +106,8 @@ export default function BecomeTutorPage() {
                                 <span className="text-primary">Earn on your terms</span>
                             </h1>
                             <p className="text-muted-foreground max-w-xl text-xl">
-                                Join thousands of tutors who are turning their expertise into income on Inclass. Set your own hours, rates, and
-                                teaching style.
+                                Join hundreds of tutors who are turning their expertise into income on Inclass. Set your own schedule, rates, and
+                                become your own boss.
                             </p>
                             <div className="flex flex-col gap-4 sm:flex-row">
                                 <Button size="lg" className="rounded-xl">
@@ -117,20 +117,20 @@ export default function BecomeTutorPage() {
                             <div className="flex items-center gap-4 pt-4">
                                 <div className="flex -space-x-2">
                                     <Avatar className="border-background border-2">
-                                        <AvatarImage src="/avatar_1.svg" />
+                                        <AvatarImage src="/tutor-1.jpg" className={'object-cover'} />
                                         <AvatarFallback>SJ</AvatarFallback>
                                     </Avatar>
                                     <Avatar className="border-background border-2">
-                                        <AvatarImage src="/avatar_2.svg" />
+                                        <AvatarImage src="/tutor-2.jpg" className={'object-cover'} />
                                         <AvatarFallback>MC</AvatarFallback>
                                     </Avatar>
                                     <Avatar className="border-background border-2">
-                                        <AvatarImage src="/avatar_3.svg" />
+                                        <AvatarImage src="/tutor-3.jpg" className={'object-cover'} />
                                         <AvatarFallback>PP</AvatarFallback>
                                     </Avatar>
                                 </div>
                                 <p className="text-muted-foreground text-sm">
-                                    Join <span className="text-foreground font-bold">5,000+</span> tutors already teaching on Inclass
+                                    Join <span className="text-foreground font-bold">100+</span> tutors already teaching on Inclass
                                 </p>
                             </div>
                         </div>
@@ -154,11 +154,11 @@ export default function BecomeTutorPage() {
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {benefits.map((benefit, index) => (
                             <Card key={index} className="hover:bg-muted rounded-2xl border-0 shadow-none">
-                                <CardHeader>
+                                <CardHeader className={'p-0 md:px-4'}>
                                     <div className="bg-muted mb-4 w-fit rounded-full p-3">{benefit.icon}</div>
                                     <CardTitle>{benefit.title}</CardTitle>
                                 </CardHeader>
-                                <CardContent>
+                                <CardContent className={'p-0 md:px-4'}>
                                     <CardDescription className="text-base">{benefit.description}</CardDescription>
                                 </CardContent>
                             </Card>

@@ -69,18 +69,11 @@ export default function HomePage() {
 
                     <div className={'flex flex-col-reverse items-center md:flex-col'}>
                         <Button className={'my-4 w-full md:w-fit'} size={'lg'} asChild>
-                            <Link href={'/find-a-tutor'}>Find a tutor</Link>
+                            <Link href={'/find-a-tutor.tsx'}>Find a tutor</Link>
                         </Button>
 
                         <div className={'my-8 flex justify-center gap-1'}>
-                            <img
-                                className={'hidden md:block'}
-                                src={'/hero_3.svg'}
-                                height={300}
-                                width={400}
-                                alt={'person sitting in park learning on laptop'}
-                            />
-                            <img src={'/hero_2.svg'} height={300} width={400} alt={'woman tutoring chemistry'} />
+                            <img src={'/hero_2.svg'} height={300} width={400} alt={'man tutoring in class'} />
                         </div>
                     </div>
                 </section>
