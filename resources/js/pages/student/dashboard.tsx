@@ -1,5 +1,7 @@
 import StudentNavigation from '@/components/student-navigation';
-import { Button } from '@/components/ui/button';
+
+import { EmptyState } from '@/components/empty-state';
+import { Link } from '@inertiajs/react';
 import React from 'react';
 import { RiFlashlightFill, RiSearchLine, RiVideoOnLine, RiWalletLine } from 'react-icons/ri';
 
@@ -14,7 +16,7 @@ export default function StudentDashboard() {
 
     const quickActions = [
         {
-            path: '/student/lessons',
+            path: '/student/find-a-tutor',
             label: 'Find a tutor',
             icon: <RiSearchLine size={20} />,
         },
@@ -24,7 +26,7 @@ export default function StudentDashboard() {
             icon: <RiVideoOnLine size={20} />,
         },
         {
-            path: '/student/lessons',
+            path: '/student/wallet',
             label: 'Recharge wallet',
             icon: <RiWalletLine size={20} />,
         },
@@ -49,25 +51,26 @@ export default function StudentDashboard() {
                 <p className={'font-medium'}>Quick actions</p>
 
                 {quickActions.map((action) => (
-                    <div
+                    <Link
+                        href={action.path}
                         key={action.path}
                         className={
                             'border-2-muted-foreground/20 flex items-center gap-4 rounded-md border-2 p-4 transition-all duration-300 hover:cursor-pointer hover:rounded-3xl'
                         }
                     >
                         {action.icon} <p className={'font-medium'}>{action.label}</p>
-                    </div>
+                    </Link>
                 ))}
             </section>
 
             <section>
-                <p className={'font-medium'}>Upcoming lessons</p>
-                <div className={'py-8 text-center'}>
-                    <img src={'/no-lessons-2.png'} className={'mx-auto'} alt={''} height={100} width={100} />
-                    <h2 className={'text-2xl font-semibold'}>No upcoming lessons</h2>
-                    <p className={'text-muted-foreground mb-2 font-medium'}>It looks like you haven't scheduled any live lessons yet!</p>
-                    <Button className={'w-full md:w-fit'}>Find a tutor</Button>
-                </div>
+                <EmptyState
+                    title={'No lessons yet'}
+                    description={"It looks like you haven't scheduled any lessons yet"}
+                    actionLabel={'Find a tutor'}
+                    actionPath={'/student/find-a-tutor'}
+                    imageSrc={'/no-lessons-2.png'}
+                />
             </section>
         </main>
     );

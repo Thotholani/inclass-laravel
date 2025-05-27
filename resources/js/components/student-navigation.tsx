@@ -1,6 +1,14 @@
 import MarketingLogo from '@/components/marketing-logo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -50,7 +58,7 @@ export default function StudentNavigation({ children }: { children: React.ReactN
             <nav className={'mx-auto flex w-11/12 max-w-7xl items-center justify-between gap-2 py-4'}>
                 <MarketingLogo />
                 <Link href={'/student/find-a-tutor'} className={'mx-auto w-5/6 md:max-w-lg'}>
-                    <Input className={'bg-muted border-none'} placeholder={'Search for tutor'} />
+                    <Input className={'bg-muted border-none shadow-none outline-none active:outline-none'} placeholder={'Search for tutor'} />
                 </Link>
                 <div className={'hidden items-center gap-2 md:flex'}>
                     {navLinks.map((link) => (
@@ -60,7 +68,20 @@ export default function StudentNavigation({ children }: { children: React.ReactN
                             </Link>
                         </Button>
                     ))}
-                    <UserAvatar />
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className={'cursor-pointer'}>
+                            <UserAvatar />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>Thotholani Tembo</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Profile</DropdownMenuItem>
+                            <DropdownMenuItem>Refer to a fr</DropdownMenuItem>
+                            <DropdownMenuItem>Help</DropdownMenuItem>
+                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
                 <div className={'md:hidden'}>
                     <Sheet>

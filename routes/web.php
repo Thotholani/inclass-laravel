@@ -35,3 +35,5 @@ Route::get("/student/lessons", fn() => inertia('student/lessons'));
 Route::get("/student/find-a-tutor", fn() => inertia('student/find-a-tutor'));
 
 Route::get("/student/wallet", fn() => inertia('student/wallet'));
+
+Route::get("/student/settings", fn() => inertia('student/settings'));

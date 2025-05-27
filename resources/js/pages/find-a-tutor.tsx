@@ -70,7 +70,7 @@ export default function FindTutorPage() {
                                                     Subject <span className={'text-red-600'}>*</span>
                                                 </h1>
                                                 <ScrollArea className="h-24 w-full">
-                                                    <RadioGroup defaultValue="Mathematics" className="p-2">
+                                                    <RadioGroup defaultValue="" className="p-2">
                                                         {subjects.map((subject) => (
                                                             <div key={subject} className="flex items-center space-x-2">
                                                                 <RadioGroupItem value={subject} id={subject} />
