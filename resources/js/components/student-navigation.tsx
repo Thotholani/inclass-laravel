@@ -76,8 +76,7 @@ export default function StudentNavigation({ children }: { children: React.ReactN
                         <DropdownMenuContent>
                             <DropdownMenuLabel>Thotholani Tembo</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Profile</DropdownMenuItem>
-                            <DropdownMenuItem>Refer to a fr</DropdownMenuItem>
+                            <DropdownMenuItem>Refer to a friend</DropdownMenuItem>
                             <DropdownMenuItem>Help</DropdownMenuItem>
                             <DropdownMenuItem>Logout</DropdownMenuItem>
                         </DropdownMenuContent>

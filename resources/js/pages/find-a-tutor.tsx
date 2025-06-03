@@ -159,7 +159,7 @@ export default function FindTutorPage() {
                                             <Button variant={'outline'} className={'hover:bg-card/70'}>
                                                 Clear filters
                                             </Button>
-                                            <Button>Apply filters</Button>
+                                            <Button>Search</Button>
                                         </div>
                                         <p className={'flex items-center gap-2 text-xs text-red-600'}>Fields marked with * are mandatory</p>
                                     </div>
