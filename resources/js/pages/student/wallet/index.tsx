@@ -14,10 +14,12 @@ export default function WalletPage() {
                     <p className={'font-medium'}>Kwacha</p>
                 </div>
 
-                <div className={'flex flex-col items-center gap-2'}>
-                    <Button variant={'secondary'}>
-                        <RiAddLine size={20} />
-                    </Button>
+                <div className={'flex flex-col items-end gap-2'}>
+                    <Link href={'/student/wallet/recharge'}>
+                        <Button variant={'secondary'} size={'icon'}>
+                            <RiAddLine size={20} />
+                        </Button>
+                    </Link>
                     <p className={'text-center text-sm font-medium'}>Recharge Wallet</p>
                 </div>
             </section>

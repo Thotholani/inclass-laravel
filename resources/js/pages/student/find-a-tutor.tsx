@@ -1,5 +1,6 @@
 import StudentNavigation from '@/components/student-navigation';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -7,7 +8,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Slider } from '@/components/ui/slider';
 import { useId, useState } from 'react';
-import { RiEqualizerLine } from 'react-icons/ri';
+import { RiEqualizerLine, RiStarFill, RiStarLine } from 'react-icons/ri';
 
 export default function FindTutorPage() {
     const subjects = [
@@ -170,10 +171,42 @@ export default function FindTutorPage() {
                 </form>
             </section>
 
+            {/*<section>*/}
+            {/*    <div className={'mt-24 w-full text-center'}>*/}
+            {/*        <h2 className={'text-lg font-medium'}>Use the filters above to search for tutors.</h2>*/}
+            {/*        <p className={'text-muted-foreground text-sm font-medium'}>Select your preferences and click "Apply Filters" to get started.</p>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
+
             <section>
-                <div className={'mt-24 w-full text-center'}>
-                    <h2 className={'text-lg font-medium'}>Use the filters above to search for tutors.</h2>
-                    <p className={'text-muted-foreground text-sm font-medium'}>Select your preferences and click "Apply Filters" to get started.</p>
+                <div className={'flex justify-between rounded-3xl border-2 p-4 transition-all duration-300 hover:cursor-pointer hover:rounded-4xl'}>
+                    <div className={'flex gap-4'}>
+                        <Avatar className={'h-full w-20 rounded-2xl'}>
+                            <AvatarImage src={'/tutor-1.jpg'} className={'object-cover'} />
+                            <AvatarFallback>TU</AvatarFallback>
+                        </Avatar>
+
+                        <div className={'max-w-sm'}>
+                            <h1 className={'text-lg font-semibold'}>Jane Doe</h1>
+                            <div className={'flex'}>
+                                <RiStarFill className={'text-violet-500'} />
+                                <RiStarFill className={'text-violet-500'} />
+                                <RiStarFill className={'text-violet-500'} />
+                                <RiStarFill className={'text-violet-500'} />
+                                <RiStarLine className={'text-muted-foreground'} />
+                                <h2 className={'ml-2 text-sm font-semibold'}>4.9 (127)</h2>
+                            </div>
+                            <p className={'text-sm font-medium'}>
+                                Passionate mathematics tutor with 5+ years of experience...
+                                <span className={'text-muted-foreground underline'}>Read more</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h1 className={'font-title text-3xl uppercase md:text-4xl'}>100.00</h1>
+                        <p className={'text-xs font-medium'}>kwacha per hour</p>
+                    </div>
                 </div>
             </section>
         </main>

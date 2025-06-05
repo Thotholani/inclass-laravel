@@ -12,11 +12,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { MenuIcon } from 'lucide-react';
 import { RiCompass4Line, RiDoorOpenLine, RiQuestionLine, RiSettingsLine, RiShareForwardLine, RiVideoOnLine, RiWalletLine } from 'react-icons/ri';
 
 export default function StudentNavigation({ children }: { children: React.ReactNode }) {
+    const { url, component } = usePage();
+
     const navLinks = [
         {
             path: '/student/dashboard',
@@ -62,7 +64,7 @@ export default function StudentNavigation({ children }: { children: React.ReactN
                 </Link>
                 <div className={'hidden items-center gap-2 md:flex'}>
                     {navLinks.map((link) => (
-                        <Button key={link.path} variant={'ghost'} asChild>
+                        <Button key={link.path} variant={url === link.path ? 'default' : 'ghost'} asChild>
                             <Link href={link.path} className={'flex gap-2 font-semibold'}>
                                 {link.label}
                             </Link>
