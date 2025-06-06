@@ -74,7 +74,7 @@ export default function WalletRechargePage() {
             </nav>
 
             {/* Main */}
-            <main className="mx-auto max-w-2xl space-y-6 py-6">
+            <main className="mx-auto w-11/12 max-w-2xl space-y-6 py-6">
                 {/* ───── Payment method ───── */}
                 <div className="space-y-3">
                     <Label className="text-sm font-medium">Payment Method</Label>
