@@ -8,7 +8,7 @@ import {
     NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Menu } from 'lucide-react';
 import type React from 'react';
 
@@ -16,6 +16,8 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
     // const [prevScrollPos, setPrevScrollPos] = useState(0);
     // const [visible, setVisible] = useState(true);
     // const [atTop, setAtTop] = useState(true);
+
+    const { props } = usePage();
 
     const platformLinks = [
         { name: 'Find a Tutor', href: 'find-a-tutor' },
@@ -94,13 +96,21 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
                                 </NavigationMenuList>
                             </NavigationMenu>
 
-                            <Button size="lg" variant="ghost" asChild>
-                                <Link href={'/login'}>Login</Link>
-                            </Button>
+                            {props.auth.user ? (
+                                <Button size="lg" asChild>
+                                    <Link href={'/dashboard'}>Dashboard</Link>
+                                </Button>
+                            ) : (
+                                <div className={'flex gap-2'}>
+                                    <Button size="lg" variant="ghost" asChild>
+                                        <Link href={'/login'}>Login</Link>
+                                    </Button>
 
-                            <Button size="lg" asChild>
-                                <Link href={'/register'}>Get started for Free</Link>
-                            </Button>
+                                    <Button size="lg" asChild>
+                                        <Link href={'/register'}>Get started for Free</Link>
+                                    </Button>
+                                </div>
+                            )}
                         </div>
 
                         <Sheet>

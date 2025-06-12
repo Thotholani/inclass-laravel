@@ -1,41 +1,69 @@
 <?php
 
-Route::get('/', fn() => inertia('home'));
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TutorController;
+use App\Models\Tutor;
 
-Route::get("/privacy", fn() => inertia('privacy'));
+// Marketing Routes
+Route::inertia('/', 'marketing/home');
+Route::inertia('/privacy', 'marketing/privacy');
+Route::inertia('/terms', 'marketing/terms');
+Route::inertia('/help', 'help');
+Route::inertia('/become-a-tutor', 'marketing/become-a-tutor');
+Route::inertia('/request-a-feature', 'marketing/request-a-feature');
+Route::inertia('/whiteboard', 'app/whiteboard');
 
-Route::get("/terms", fn() => inertia('terms'));
 
-Route::get("/login", fn() => inertia('login'));
+// ********* Authentication *********
+// Login
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store']);
 
-Route::get("/register", fn() => inertia('register'));
+// Register
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get("/forgot-password", fn() => inertia('forgot-password'));
+// Student Creation
+Route::post("/student-register", [StudentController::class, "store"])->middleware("auth");
+// Tutor Creation
+Route::post("/tutor-register", [TutorController::class, "store"])->middleware("auth");
 
-Route::get("/help", fn() => inertia('help'));
+// Role Selection
+Route::get("/select-role", fn() => inertia('auth/select-role'))->name("select-role")->middleware("auth");
+Route::get("/select-role/student", [StudentController::class, "create"])->middleware("auth");
+Route::get("/select-role/tutor", [TutorController::class, "create"])->middleware("auth");
+// Other
+Route::inertia('/forgot-password', 'auth/forgot-password');
+Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth");
+// ********* Authentication *********
 
-Route::get("/find-a-tutor", fn() => inertia('find-a-tutor'));
 
-Route::get("/become-a-tutor", fn() => inertia('become-a-tutor'));
+// Application Routes
+Route::middleware(['auth', 'role:student,tutor'])->group(function () {
+    Route::get('/dashboard', fn() => inertia('app/dashboard'));
+    Route::get("/lessons", [\App\Http\Controllers\LessonController::class, "index"])->middleware("auth");
+    Route::get("/find-a-tutor",
+        function () {
 
-Route::get("/request-a-feature", fn() => inertia('request-a-feature'));
+            $tutors = Tutor::with('user')->orderByDesc("rating")->paginate(10);
+//        dump(
+//            Tutor::with('user')->paginate(5)->toArray()
+//        );
+//        dd($tutors);
 
-Route::get("/whiteboard", fn() => inertia('whiteboard'));
+            return inertia('app/find-a-tutor', ['tutors' => $tutors]);
+        });
+    Route::get("/find-a-tutor/{id}", function ($id) {
+        $tutor = Tutor::with('user')->find($id);
+        return inertia('student/tutor', ['tutor' => $tutor]);
+    });
+    Route::get("/wallet", fn() => inertia('app/wallet/index'));
+    Route::get('/settings', [RegisteredUserController::class, 'index']);
+});
 
-Route::get("/select-role", fn() => inertia('auth/select-role'));
+// Student Routes
+Route::get("/wallet/recharge", fn() => inertia('app/wallet/recharge'));
+// Tutor Routes
 
-Route::get("/select-role/student", fn() => inertia('auth/student-register'));
-
-Route::get("/select-role/tutor", fn() => inertia('auth/tutor-register'));
-
-Route::get("/student/dashboard", fn() => inertia('student/dashboard'));
-
-Route::get("/student/lessons", fn() => inertia('student/lessons'));
-
-Route::get("/student/find-a-tutor", fn() => inertia('student/find-a-tutor'));
-
-Route::get("/student/wallet", fn() => inertia('student/wallet/index'));
-
-Route::get("/student/wallet/recharge", fn() => inertia('student/wallet/recharge'));
-
-Route::get("/student/settings", fn() => inertia('student/settings'));
