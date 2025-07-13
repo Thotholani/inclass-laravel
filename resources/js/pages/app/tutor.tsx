@@ -1,3 +1,4 @@
+import { BookLessonDialog } from '@/components/book-lesson-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -81,12 +82,14 @@ export default function TutorProfilePage({ tutor }) {
                 <div className="mx-auto flex max-w-4xl items-center justify-between">
                     <div className="flex items-center space-x-3">
                         <Button asChild variant="secondary">
-                            <Link href="/app/find-a-tutor">
+                            <Link href="/find-a-tutor">
                                 <RiArrowLeftSLine className="h-5 w-5" />
                                 Back
                             </Link>
                         </Button>
-                        <h1 className="text-lg font-semibold text-black">View Tutor</h1>
+                        <h1 className="text-lg font-semibold text-black">
+                            {tutor.user.name} - {tutor.subject}
+                        </h1>
                     </div>
                 </div>
             </header>
@@ -114,7 +117,7 @@ export default function TutorProfilePage({ tutor }) {
                                     <h1 className="mb-2 text-3xl font-bold text-black">{tutor.user.name}</h1>
 
                                     <div className={'hidden md:block'}>
-                                        <ActionButtons />
+                                        <ActionButtons name={tutor.user.name} />
                                     </div>
                                 </div>
                                 <div className="mb-3 flex items-center space-x-4 text-black">
@@ -234,11 +237,15 @@ export default function TutorProfilePage({ tutor }) {
     );
 }
 
-function ActionButtons() {
+interface ActionButtonsProps {
+    name: string;
+}
+
+function ActionButtons({ name }: ActionButtonsProps) {
     return (
         <>
             <div className={'mb-8 flex flex-col gap-2 md:flex-row'}>
-                <Button className={'w-full md:w-fit'}>Book a lesson</Button>
+                <BookLessonDialog name={name} />
                 <Button variant={'outline'} className={'w-full md:w-fit'}>
                     Message
                 </Button>

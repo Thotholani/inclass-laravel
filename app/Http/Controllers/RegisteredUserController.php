@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AccountCreated;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
@@ -31,6 +33,8 @@ class RegisteredUserController extends Controller
         $attributes = array_diff($validated, [true]);
 
         $new_user = User::create($attributes);
+
+        Mail::to($new_user)->send(new AccountCreated($new_user));
 
         Auth::login($new_user);
 

@@ -184,11 +184,11 @@ export default function RegisterPage() {
                             />
                             <Label htmlFor="terms" className="text-sm font-normal">
                                 I agree to the{' '}
-                                <Link href="/marketing/terms" className="hover:text-foreground underline transition-colors">
+                                <Link href="/terms" className="hover:text-foreground underline transition-colors">
                                     Terms of Service
                                 </Link>{' '}
                                 and{' '}
-                                <Link href="/marketing/privacy" className="hover:text-foreground underline transition-colors">
+                                <Link href="/privacy" className="hover:text-foreground underline transition-colors">
                                     Privacy Policy
                                 </Link>
                             </Label>

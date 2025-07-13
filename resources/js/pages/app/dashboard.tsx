@@ -1,9 +1,19 @@
 import AppNavigation from '@/components/app-navigation';
-import { EmptyState } from '@/components/empty-state';
+import { Button } from '@/components/ui/button';
 import { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import React from 'react';
-import { RiFlashlightFill, RiMoneyDollarCircleFill, RiQuestionLine, RiSearchLine, RiVideoOnLine, RiWalletLine } from 'react-icons/ri';
+import {
+    RiCloseLine,
+    RiFlashlightFill,
+    RiMoneyDollarCircleFill,
+    RiQuestionLine,
+    RiSearchLine,
+    RiVideoOnLine,
+    RiWalletLine,
+} from 'react-icons/ri'; /* ------------------------------------------------------------------------
+ * 1.  Role-based dictionaries
+ * --------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------
  * 1.  Role-based dictionaries
@@ -15,7 +25,7 @@ const CARD_BY_ROLE = {
         value: 0,
     },
     tutor: {
-        icon: <RiMoneyDollarCircleFill className="text-green-500" size={24} />,
+        icon: <RiMoneyDollarCircleFill className="text-[#0ba35d]" size={24} />,
         label: 'Wallet balance',
         value: 0,
     },
@@ -58,7 +68,13 @@ export default function Dashboard() {
             </h1>
 
             {/* card same component, fed by lookup */}
-            <section className="flex h-full gap-4">
+            <section className="flex h-full flex-col gap-4 md:flex-row">
+                {/*<img*/}
+                {/*    src={role === 'student' ? '/dash-2.png' : '/dash.png'}*/}
+                {/*    alt={'Woman outside on computer'}*/}
+                {/*    className={'h-20 w-full rounded-2xl object-cover object-bottom md:h-50 md:w-fit'}*/}
+                {/*/>*/}
+
                 <div className="bg-muted col-span-1 h-30 w-full rounded-2xl p-6 transition-all md:h-50 md:w-50">
                     <span className="flex items-center gap-2">
                         <h1 className="font-title text-3xl uppercase">{card.value}</h1>
@@ -76,7 +92,7 @@ export default function Dashboard() {
                     <Link
                         key={a.path}
                         href={a.path}
-                        className="hover:bg-muted/90 border-muted-foreground/20 flex items-center gap-4 rounded-md border-2 p-4 transition-all duration-300 hover:cursor-pointer hover:rounded-3xl"
+                        className="hover:bg-primary hover:text-primary-foreground bg-muted/90 flex items-center gap-4 rounded-md p-4 transition-all duration-300 hover:cursor-pointer hover:rounded-3xl"
                     >
                         {a.icon}
                         <p className="font-medium">{a.label}</p>
@@ -86,7 +102,31 @@ export default function Dashboard() {
 
             {/* empty-state section stays unchanged */}
             <section>
-                <EmptyState title="No lessons yet" description="It looks like you haven't scheduled any lessons yet" imageSrc="/no-lessons-2.png" />
+                <p className="mb-4 font-medium">Upcoming lessons</p>
+                <div className={'border-muted-foreground/20 flex w-full gap-4 rounded-md border-2 p-4'}>
+                    {/*<img src={'/subjects/math.png'} alt={'lesson icon'} className={'h-16 w-16'} />*/}
+
+                    <div className={'flex w-full justify-between'}>
+                        <div>
+                            <h1 className={'text-2xl font-semibold'}>Mathematics</h1>
+                            <h2 className={'font-medium'}>Thotholani Tembo</h2>
+                            <h2 className={'text-sm font-medium'}>Wednesday 18 June 2025</h2>
+                        </div>
+
+                        <div className={'flex w-fit flex-col gap-2'}>
+                            <Button>
+                                <RiVideoOnLine />
+                                <span className={'hidden md:block'}>Join Lesson</span>
+                            </Button>
+                            <Button variant={'secondary'} className={'hover:bg-muted-foreground/10'}>
+                                <RiCloseLine />
+                                <span className={'hidden md:block'}>Cancel Lesson</span>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+
+                {/*<EmptyState title="No lessons yet" description="It looks like you haven't scheduled any lessons yet" />*/}
             </section>
         </main>
     );

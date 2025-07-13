@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'role' => App\Http\Middleware\Role::class,
+            'profileIncomplete' => \App\Http\Middleware\ProfileIncomplete::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

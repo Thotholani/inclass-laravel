@@ -11,7 +11,10 @@ class LessonController extends Controller
 
     public function index()
     {
-        return inertia("Lessons", ["lessons" => Lesson::all()]);
+
+//        dd("hello from lesons");
+
+        return inertia("app/lessons", ["lessons" => Lesson::with(["tutor.user", "student.user"])->get()]);
     }
 
     public function store(StoreLessonRequest $request)

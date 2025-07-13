@@ -8,13 +8,12 @@ use App\Models\Tutor;
 
 // Marketing Routes
 Route::inertia('/', 'marketing/home');
-Route::inertia('/privacy', 'marketing/privacy');
-Route::inertia('/terms', 'marketing/terms');
+Route::inertia('/privacy', 'marketing/privacy')->name('privacy');
+Route::inertia('/terms', 'marketing/terms')->name("terms");
 Route::inertia('/help', 'help');
 Route::inertia('/become-a-tutor', 'marketing/become-a-tutor');
 Route::inertia('/request-a-feature', 'marketing/request-a-feature');
 Route::inertia('/whiteboard', 'app/whiteboard');
-
 
 // ********* Authentication *********
 // Login
@@ -31,9 +30,12 @@ Route::post("/student-register", [StudentController::class, "store"])->middlewar
 Route::post("/tutor-register", [TutorController::class, "store"])->middleware("auth");
 
 // Role Selection
-Route::get("/select-role", fn() => inertia('auth/select-role'))->name("select-role")->middleware("auth");
-Route::get("/select-role/student", [StudentController::class, "create"])->middleware("auth");
-Route::get("/select-role/tutor", [TutorController::class, "create"])->middleware("auth");
+//TODO: Imple
+Route::middleware(['auth', 'profileIncomplete:user'])->group(function () {
+    Route::get("/select-role", fn() => inertia('auth/select-role'))->name("select-role")->middleware("auth");
+    Route::get("/select-role/student", [StudentController::class, "create"])->middleware("auth");
+    Route::get("/select-role/tutor", [TutorController::class, "create"])->middleware("auth");
+});
 // Other
 Route::inertia('/forgot-password', 'auth/forgot-password');
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth");
@@ -42,7 +44,7 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth"
 
 // Application Routes
 Route::middleware(['auth', 'role:student,tutor'])->group(function () {
-    Route::get('/dashboard', fn() => inertia('app/dashboard'));
+    Route::get('/dashboard', fn() => inertia('app/dashboard'))->name("dashboard");
     Route::get("/lessons", [\App\Http\Controllers\LessonController::class, "index"])->middleware("auth");
     Route::get("/find-a-tutor",
         function () {
@@ -57,7 +59,7 @@ Route::middleware(['auth', 'role:student,tutor'])->group(function () {
         });
     Route::get("/find-a-tutor/{id}", function ($id) {
         $tutor = Tutor::with('user')->find($id);
-        return inertia('student/tutor', ['tutor' => $tutor]);
+        return inertia('app/tutor', ['tutor' => $tutor]);
     });
     Route::get("/wallet", fn() => inertia('app/wallet/index'));
     Route::get('/settings', [RegisteredUserController::class, 'index']);
@@ -66,4 +68,12 @@ Route::middleware(['auth', 'role:student,tutor'])->group(function () {
 // Student Routes
 Route::get("/wallet/recharge", fn() => inertia('app/wallet/recharge'));
 // Tutor Routes
+
+
+// Tools Routes
+Route::get("/lesson/{id}", function () {
+
+
+    return inertia('app/lesson');
+});
 

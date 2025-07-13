@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -18,22 +17,34 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'min:3'],
+            'image' => ['nullable', 'image', 'max:2048']
         ]);
 
-        $user = User::findOrFail(Auth::id());
-        $user->update(
-            [
-                "role" => "student",
-                "name" => $validated["name"],
-            ]
-        );
+        $user = $request->user();   // nicer than User::find(Auth::id())
 
-        Student::create(
-            [
-                "user_id" => $user->id,
-            ]
-        );
+        if ($request->hasFile('image')) {
+            // store on the PUBLIC disk so /storage/… serves it
+            $path = $request->file('image')->store('profile-images', 'public');
 
-        return redirect("dashboard");
+            // delete old photo if one exists
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
+
+            $user->image = $path;
+        }
+
+        $user->fill([
+            'name' => $validated['name'],
+            'role' => 'student',
+        ])->save();
+
+        // make sure the Student row exists
+        $user->student()->firstOrCreate([]);
+
+        // re-authenticate so Inertia gets fresh data on next page
+        Auth::login($user->fresh());
+
+        return redirect()->route('dashboard');
     }
 }

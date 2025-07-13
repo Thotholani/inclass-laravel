@@ -24,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
         Gate::define("view-page", function (User $user) {
             return $user->role != "user";
         });
+
+        Gate::define("view-page", function (User $user) {
+            $roles = ["tutor", "student"];
+
+            return in_array("$user->role", $roles);
+        });
         //
     }
 }

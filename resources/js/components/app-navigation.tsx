@@ -14,8 +14,17 @@ import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { SharedData } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
-import { MenuIcon } from 'lucide-react';
-import { RiCompass4Line, RiDoorOpenLine, RiQuestionLine, RiSettingsLine, RiShareForwardLine, RiVideoOnLine, RiWalletLine } from 'react-icons/ri';
+import { ChevronDown, MenuIcon } from 'lucide-react';
+import {
+    RiCompass4Line,
+    RiDoorOpenLine,
+    RiMessage3Line,
+    RiQuestionLine,
+    RiSettingsLine,
+    RiShareForwardLine,
+    RiVideoOnLine,
+    RiWalletLine,
+} from 'react-icons/ri';
 
 export default function AppNavigation({ children }: { children: React.ReactNode }) {
     const { url, props } = usePage<SharedData>();
@@ -34,6 +43,12 @@ export default function AppNavigation({ children }: { children: React.ReactNode 
             label: 'Lessons',
             icon: <RiVideoOnLine size={20} />,
         },
+        {
+            path: '/messages',
+            label: 'Messages',
+            icon: <RiMessage3Line size={20} />,
+        },
+
         {
             path: '/wallet',
             label: 'Wallet',
@@ -69,7 +84,7 @@ export default function AppNavigation({ children }: { children: React.ReactNode 
                 <MarketingLogo />
 
                 {user.role === 'student' && (
-                    <Link href={'/student/find-a-tutor'} className={'mx-auto w-5/6 md:max-w-lg'}>
+                    <Link href={'/find-a-tutor'} className={'mx-auto w-5/6 md:max-w-lg'}>
                         <Input className={'bg-muted border-none shadow-none outline-none active:outline-none'} placeholder={'Search for tutor'} />
                     </Link>
                 )}
@@ -85,7 +100,10 @@ export default function AppNavigation({ children }: { children: React.ReactNode 
 
                     <DropdownMenu>
                         <DropdownMenuTrigger className={'cursor-pointer'}>
-                            <UserAvatar />
+                            <span className={'flex items-center gap-2'}>
+                                <UserAvatar user={user} />
+                                <ChevronDown size={16} />
+                            </span>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
@@ -105,7 +123,7 @@ export default function AppNavigation({ children }: { children: React.ReactNode 
                         </SheetTrigger>
                         <SheetContent className={'px-6 py-16'}>
                             <div className={'flex gap-4'}>
-                                <UserAvatar />
+                                <UserAvatar user={user} />
                                 <div>
                                     <h2 className={'font-medium'}>{user.name}</h2>
                                     <p className={'text-muted-foreground text-sm'}>{user.email}</p>
@@ -138,10 +156,11 @@ export default function AppNavigation({ children }: { children: React.ReactNode 
     );
 }
 
-function UserAvatar() {
+function UserAvatar({ user }) {
     return (
         <Avatar className="h-8 w-8">
-            <AvatarImage src={'/profile-image.jpg'} alt="@thotholani" className="object-cover" />
+            {/*<img src={"/storage/"+}/>*/}
+            <AvatarImage src={'/storage/' + user.image} alt="@thotholani" className="object-cover" />
             <AvatarFallback>TT</AvatarFallback>
         </Avatar>
     );

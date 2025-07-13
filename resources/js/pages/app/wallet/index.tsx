@@ -1,11 +1,16 @@
 import AppNavigation from '@/components/app-navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Link } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import React from 'react';
-import { RiAddLine, RiArrowUpLine } from 'react-icons/ri';
+import { RiAddLine, RiArrowUpLine, RiSubtractLine } from 'react-icons/ri';
 
 export default function WalletPage() {
+    const { auth } = usePage<SharedData>().props;
+
+    const user = auth.user;
+
     return (
         <main className={'mx-auto mt-8 w-11/12 max-w-4xl space-y-16'}>
             <section className={'bg-primary text-primary-foreground flex items-center justify-between rounded-2xl p-8'}>
@@ -14,14 +19,25 @@ export default function WalletPage() {
                     <p className={'font-medium'}>Kwacha</p>
                 </div>
 
-                <div className={'flex flex-col items-end gap-2'}>
-                    <Link href={'/student/wallet/recharge'}>
-                        <Button variant={'secondary'} size={'icon'}>
-                            <RiAddLine size={20} />
-                        </Button>
-                    </Link>
-                    <p className={'text-center text-sm font-medium'}>Recharge Wallet</p>
-                </div>
+                {user.role === 'student' ? (
+                    <div className={'flex flex-col items-end gap-2'}>
+                        <Link href={'/wallet/recharge'}>
+                            <Button variant={'secondary'} size={'icon'}>
+                                <RiAddLine size={20} />
+                            </Button>
+                        </Link>
+                        <p className={'text-center text-sm font-medium'}>Recharge Wallet</p>
+                    </div>
+                ) : (
+                    <div className={'flex flex-col items-end gap-2'}>
+                        <Link href={'/wallet/withdraw'}>
+                            <Button variant={'secondary'} size={'icon'}>
+                                <RiSubtractLine size={20} />
+                            </Button>
+                        </Link>
+                        <p className={'text-center text-sm font-medium'}>Withdraw from Wallet</p>
+                    </div>
+                )}
             </section>
 
             <section className={'space-y-4'}>

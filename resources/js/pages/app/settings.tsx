@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { SharedData } from '@/types';
+import { usePage } from '@inertiajs/react';
 import { Check, Edit3 } from 'lucide-react';
 import React from 'react';
 import {
@@ -18,6 +20,9 @@ import {
 } from 'react-icons/ri';
 
 export default function StudentSettingsPage() {
+    const { props } = usePage<SharedData>();
+    const { user } = props.auth;
+
     return (
         <main className="mx-auto w-11/12 max-w-4xl py-8">
             {/* Heading */}
@@ -39,7 +44,7 @@ export default function StudentSettingsPage() {
                         <div className="flex items-center space-x-6">
                             <div className="relative">
                                 <Avatar className="h-20 w-20">
-                                    <AvatarImage src="/placeholder.svg?height=80&width=80" />
+                                    <AvatarImage src={'/storage/' + user.image} className="object-cover" />
                                     <AvatarFallback className="bg-muted">TT</AvatarFallback>
                                 </Avatar>
                                 <Button size="sm" className="absolute -right-2 -bottom-2 h-8 w-8 rounded-full">

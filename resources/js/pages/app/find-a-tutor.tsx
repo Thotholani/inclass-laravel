@@ -196,7 +196,7 @@ export default function FindTutorPage({ tutors }) {
 
                             return (
                                 <Link
-                                    href={'/student/find-a-tutor/' + tutor.id}
+                                    href={'/find-a-tutor/' + tutor.id}
                                     key={tutor.id}
                                     className={
                                         'hover:bg-muted/90 flex justify-between rounded-3xl border-2 p-4 transition-all duration-300 hover:cursor-pointer hover:rounded-4xl active:rounded-4xl'
