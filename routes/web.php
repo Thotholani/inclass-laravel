@@ -42,13 +42,16 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth"
 // ********* Authentication *********
 
 
+Route::get("/select-role/tutor/complete", function () {
+    return inertia("auth/complete-tutor");
+});
+
 // Application Routes
 Route::middleware(['auth', 'role:student,tutor'])->group(function () {
     Route::get('/dashboard', fn() => inertia('app/dashboard'))->name("dashboard");
     Route::get("/lessons", [\App\Http\Controllers\LessonController::class, "index"])->middleware("auth");
     Route::get("/find-a-tutor",
         function () {
-
             $tutors = Tutor::with('user')->orderByDesc("rating")->paginate(10);
 //        dump(
 //            Tutor::with('user')->paginate(5)->toArray()
@@ -72,8 +75,6 @@ Route::get("/wallet/recharge", fn() => inertia('app/wallet/recharge'));
 
 // Tools Routes
 Route::get("/lesson/{id}", function () {
-
-
     return inertia('app/lesson');
 });
 
