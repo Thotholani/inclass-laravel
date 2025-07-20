@@ -1,4 +1,3 @@
-import { Toaster } from '@/components/ui/sonner';
 import { createInertiaApp } from '@inertiajs/react';
 import createServer from '@inertiajs/react/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -25,12 +24,7 @@ createServer((page) =>
                 });
             /* eslint-enable */
 
-            return (
-                <>
-                    <App {...props} />
-                    <Toaster />
-                </>
-            );
+            return <App {...props} />;
         },
     }),
 );
