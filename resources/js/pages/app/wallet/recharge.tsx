@@ -65,7 +65,7 @@ export default function WalletRechargePage() {
                 <div className="mx-auto flex w-11/12 max-w-7xl items-center justify-between">
                     <MarketingLogo />
 
-                    <Link href="/app/wallet">
+                    <Link href="/wallet">
                         <Button size="icon" variant="secondary">
                             <RiCloseLine />
                         </Button>

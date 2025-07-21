@@ -47,7 +47,7 @@ export default function WalletPage() {
                     className={
                         'hover:bg-muted/90 border-muted-foreground/20 flex cursor-pointer justify-between rounded-2xl border-2 p-4 transition-all duration-300 hover:rounded-4xl'
                     }
-                    href={'/student/wallet/1'}
+                    href={'/wallet/1'}
                 >
                     <div className={'flex items-center gap-2'}>
                         <div className={'bg-muted flex h-fit w-fit rounded-full p-4'}>

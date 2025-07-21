@@ -41,10 +41,12 @@ Route::inertia('/forgot-password', 'auth/forgot-password');
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth");
 // ********* Authentication *********
 
-
-Route::get("/select-role/tutor/complete", function () {
-    return inertia("auth/complete-tutor");
+Route::middleware(['auth'])->group(function () {
+    Route::get("/select-role/tutor/complete", function () {
+        return inertia("auth/complete-tutor");
+    })->name("tutor-completed");
 });
+
 
 // Application Routes
 Route::middleware(['auth', 'role:student,tutor'])->group(function () {

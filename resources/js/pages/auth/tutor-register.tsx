@@ -93,10 +93,7 @@ export default function TutorRegisterPage() {
     ];
     const subjects = [
         // Secondary school / Zambian syllabus
-        {
-            name: 'Mathematics',
-            icon: <Calculator />,
-        },
+        { name: 'Mathematics', icon: <Calculator /> },
         { name: 'English', icon: <RiTranslate2 /> },
         { name: 'Biology', icon: <RiPlantLine /> },
         { name: 'Chemistry', icon: <RiTestTubeLine /> },
@@ -127,10 +124,10 @@ export default function TutorRegisterPage() {
         { name: 'Communication and Media', icon: <Clapperboard /> },
     ];
     const educationLevels = [
-        { value: 'primary', label: 'Primary School' },
-        { value: 'secondary', label: 'High School' },
-        { value: 'college', label: 'College/University' },
-        { value: 'adult', label: 'Adult Education' },
+        { value: 'PR', label: 'Primary School' },
+        { value: 'SC', label: 'High School' },
+        { value: 'CO', label: 'College/University' },
+        { value: 'AD', label: 'Adult Education' },
     ];
     const imageGuidelines = [
         'You should be facing forward',
@@ -141,34 +138,13 @@ export default function TutorRegisterPage() {
         'Avoid logos or contact information',
     ];
     const languages = [
-        {
-            label: 'English',
-            value: 'English',
-        },
-        {
-            label: 'Cibemba',
-            value: 'Cibemba',
-        },
-        {
-            label: 'Nyanja',
-            value: 'Nyanja',
-        },
-        {
-            label: 'Chichewa',
-            value: 'Chichewa',
-        },
-        {
-            label: 'Silozi',
-            value: 'Silozi',
-        },
-        {
-            label: 'French',
-            value: 'French',
-        },
-        {
-            label: 'Mandarin',
-            value: 'Mandarin',
-        },
+        { label: 'English', value: 'en' },
+        { label: 'Cibemba', value: 'bm' },
+        { label: 'Nyanja', value: 'ny' },
+        { label: 'Chichewa', value: 'ch' },
+        { label: 'Silozi', value: 'lo' },
+        { label: 'French', value: 'fr' },
+        { label: 'Mandarin', value: 'zh' },
     ];
 
     function getInitialValues(authName: string) {
@@ -179,7 +155,7 @@ export default function TutorRegisterPage() {
             languages: [] as string[],
             education_levels: [] as string[],
             subject: '',
-            phone: '',
+            mobile_money_number: '',
             bio: '',
             qualification: null,
             schedule: blankWeek() as WeekSchedule,
@@ -284,7 +260,7 @@ export default function TutorRegisterPage() {
                     setPageError('Enter your full name');
                     return false;
                 }
-                if (!data.phone.trim() || data.phone.trim().length < 13) {
+                if (!data.mobile_money_number.trim() || data.mobile_money_number.trim().length < 13) {
                     setPageError('Enter a mobile money number with 10 digits');
                     return false;
                 }
@@ -352,12 +328,12 @@ export default function TutorRegisterPage() {
     function submit(e: React.FormEvent) {
         e.preventDefault();
 
-        console.log(data);
+        console.log('Submitting form...');
 
-        // post('/tutor-register', {
-        //     forceFormData: true,
-        //     onSuccess: () => localStorage.removeItem(LOCAL_KEY),
-        // });
+        post('/tutor-register', {
+            forceFormData: true,
+            onSuccess: () => localStorage.removeItem(LOCAL_KEY),
+        });
     }
 
     return (
@@ -437,15 +413,15 @@ export default function TutorRegisterPage() {
                             <div className={'space-y-2'}>
                                 <Label>Mobile Number</Label>
                                 <PhoneNumberInput
-                                    value={data.phone}
-                                    onChange={(value) => setData('phone', value)} // ✅ Correct: value is string
+                                    value={data.mobile_money_number}
+                                    onChange={(value) => setData('mobile_money_number', value)} // ✅ Correct: value is string
                                     defaultCountry="ZM"
                                     className={'rounded-none'}
                                     placeholder="Enter your phone number"
                                 />
                                 <p className={'text-muted-foreground text-xs'}>
-                                    {errors.phone
-                                        ? errors.phone
+                                    {errors.mobile_money_number
+                                        ? errors.mobile_money_number
                                         : 'Provide the Airtel or MTN mobile-money number where you’ll receive your earnings. Make sure it’s registered for mobile-money and that you have access to it.'}
                                 </p>
                             </div>
