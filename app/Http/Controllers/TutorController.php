@@ -15,7 +15,7 @@ class TutorController extends Controller
 
     public function store(StoreTutorRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $user = $request->user();
 
         DB::transaction(function () use ($request, $user) {
