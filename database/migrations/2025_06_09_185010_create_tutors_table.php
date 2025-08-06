@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('subject');                     // main subject
             $table->text('bio');
             $table->decimal('hourly_rate', 8, 2);          // ZMW 999,999.99 max
-            $table->string('mobile_money_number', 10);
+            $table->string('mobile_money_number', 20);
             $table->string('qualification_path')->nullable(); // stored file
             $table->enum('verification_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
