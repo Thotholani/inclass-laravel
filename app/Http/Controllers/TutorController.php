@@ -35,7 +35,7 @@ class TutorController extends Controller
                 [
                     'subject' => $request->subject,
                     'bio' => $request->bio,
-                    'hourly_rate' => $request->hourly_rate,
+                    'hourly_rate' => floatval($request->hourly_rate),
                     'mobile_money_number' => $request->mobile_money_number,
                     'qualification_path' => $qualificationPath,
                     'verification_status' => 'pending',

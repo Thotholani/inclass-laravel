@@ -58,21 +58,11 @@ export default function StudentSettingsPage() {
                         </div>
 
                         {/* Personal Information */}
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <div className="space-y-2">
-                                <Label htmlFor="firstName">First Name</Label>
-                                <div className="relative">
-                                    <Input id="firstName" defaultValue="Thotholani" className="border-input bg-background focus-visible:ring-ring" />
-                                    <Edit3 className="text-muted-foreground absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform" />
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="lastName">Last Name</Label>
-                                <div className="relative">
-                                    <Input id="lastName" defaultValue="Student" className="border-input bg-background focus-visible:ring-ring" />
-                                    <Edit3 className="text-muted-foreground absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform" />
-                                </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="firstName">Fullname</Label>
+                            <div className="relative">
+                                <Input id="firstName" defaultValue={user.name} className="border-input bg-background focus-visible:ring-ring" />
+                                <Edit3 className="text-muted-foreground absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform" />
                             </div>
                         </div>
 
@@ -82,7 +72,7 @@ export default function StudentSettingsPage() {
                                 <Input
                                     id="email"
                                     type="email"
-                                    defaultValue="thotholani@example.com"
+                                    defaultValue={user.email}
                                     className="border-input bg-background focus-visible:ring-ring"
                                 />
                                 <Edit3 className="text-muted-foreground absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform" />

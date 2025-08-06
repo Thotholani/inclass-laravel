@@ -9,11 +9,11 @@ class Tutor extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id', 'subject', 'bio', 'hourly_rate',
-        'mobile_money_number', 'qualification_path',
-        'verification_status',
-    ];
+//    protected $fillable = [
+//        'user_id', 'subject', 'bio', 'hourly_rate',
+//        'mobile_money_number', 'qualification_path',
+//        'verification_status',
+//    ];
 
     public function languages()
     {
